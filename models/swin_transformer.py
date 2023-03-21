@@ -12,9 +12,8 @@ import torch.utils.checkpoint as checkpoint
 import numpy as np
 from timm.models.layers import DropPath, to_2tuple, trunc_normal_
 
-from ..mmcv_custom import load_checkpoint
-from mmdet.utils import get_root_logger
-
+# from ..mmcv_custom import load_checkpoint
+# from mmdet.utils import get_root_logger
 
 class Mlp(nn.Module):
     """ Multilayer perceptron."""
@@ -695,14 +694,14 @@ class SwinTransformer(nn.Module):
                 nn.init.constant_(m.bias, 0)
                 nn.init.constant_(m.weight, 1.0)
 
-        if isinstance(pretrained, str):
-            self.apply(_init_weights)
-            logger = get_root_logger()
-            load_checkpoint(self, pretrained, strict=False, logger=logger)
-        elif pretrained is None:
-            self.apply(_init_weights)
-        else:
-            raise TypeError("pretrained must be a str or None")
+        # if isinstance(pretrained, str):
+        #     self.apply(_init_weights)
+        #     logger = get_root_logger()
+        #     load_checkpoint(self, pretrained, strict=False, logger=logger)
+        # elif pretrained is None:
+        self.apply(_init_weights)
+        # else:
+            # raise TypeError("pretrained must be a str or None")
 
     def forward(self, x):
         """Forward function."""
